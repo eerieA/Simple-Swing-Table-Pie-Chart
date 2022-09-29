@@ -1,4 +1,4 @@
-# Personal Project - Idea 1
+# Personal Project - Idea
 
 ## Stock portfolio pie charts
 
@@ -14,21 +14,3 @@ User stories:
 - As a user, I want to be able to **update** those items, such as: change shares/worth.
 - *(Stretch goal)* As a user, I may want to see pie charts for 2-3 months juxtaposed together for comparison.
 - *(Stretch goal)* As a user, I may want to see an alternate chart of the same month, but with stocks categorized by sectors.
-
-
-
-# Personal Project - Idea 2
-
-## Person name generator in English
-
-Basic goals proposal:
-- What will the application do? Let a user input two initial letters, and then click a button to generate one or multiple human names in English.
-- Who will use it? Writers who want to have placeholder names for their short stories.
-- Why is this project of interest to you? I found a similar idea in a Git repo listing some starter java project ideas. There is an idea of name generator that involves using RNN, so I was attracted to it. However, I don't think using RNN is very easy for my at this stage. So I simplified that idea down to this one.
-
-User stories:
-- As a user, I want to 1-click generate a random English name for a person, using an embedded library of **first name**s and **surname**s.
-- As a user, I want to **specify the initial letters**, and don't mind limiting it to two letters.
-- As a user, I want to see the generated name in a GUI.
-- *(Stretch goal)* As a user, I might want to also specify whether I want the name to sound like **cis female**, **cis male** or **unisex**.
-- As a user, I might want to generate an arbitrary number of names (X) and form a list (Y), see all of them in a GUI, so that I can pick one I like the best.
