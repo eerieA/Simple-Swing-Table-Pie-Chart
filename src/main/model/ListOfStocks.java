@@ -7,21 +7,21 @@ public class ListOfStocks {
     private ArrayList<Stock> stocks;
 
     // EFFECTS: initiate a ListOfStocks with an empty ArrayList ready to store Stock objects.
-    public ListOfStocks(){
-        //stub
+    public ListOfStocks() {
+        this.stocks = new ArrayList<Stock>();
     }
 
     // REQUIRES: s is not null.
     // MODIFIES: this.
     // EFFECTS: add a stock to the list.
-    public void addStock(Stock s){
-        //stub
+    public void addStock(Stock s) {
+        stocks.add(s);
     }
 
     // MODIFIES: this.
     // EFFECTS: delete an investment item of the given stock name from the list.
-    public void deleteStock(String n){
-        //stub
+    public void deleteStock(int id) {
+        stocks.remove(id);
     }
 
  /*   // MODIFIES: this.
