@@ -9,8 +9,9 @@ Basic goals proposal:
 
 User stories:
 - As a user, I want to be able to **input** an arbitrary number of my invested stocks (X) into a list (Y).
-- As a user, I want to input data about those items, including: **name**, **shares**, **worth**.
+- As a user, I want to input data about those items, including: **name**, **invested money**, **price**.
 - As a user, I want to be able to **delete** those items.
-- As a user, I want to be able to **update** those items, such as: change shares/worth.
+- As a user, I want to be able to **update** those items, such as: change prices or invested money on it.
+- As a user, I need to see a **list** of stocks with their info in each row, or something like that.
 - *(Stretch goal)* As a user, I may want to see pie charts for 2-3 months juxtaposed together for comparison.
 - *(Stretch goal)* As a user, I may want to see an alternate chart of the same month, but with stocks categorized by sectors.
