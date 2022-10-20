@@ -13,5 +13,7 @@ User stories:
 - As a user, I want to be able to **delete** those items.
 - As a user, I want to be able to **update** those items, such as: change prices or invested money on it.
 - As a user, I need to see a **list** of stocks with their info in each row, or something like that.
+- As a user, I want to save inputted stock info items in a file on hard drive.
+- As a user, I want to load the file I saved last time.
 - *(Stretch goal)* As a user, I may want to see pie charts for 2-3 months juxtaposed together for comparison.
 - *(Stretch goal)* As a user, I may want to see an alternate chart of the same month, but with stocks categorized by sectors.
