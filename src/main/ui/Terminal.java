@@ -2,14 +2,27 @@ package ui;
 
 import model.ListOfStocks;
 import model.Stock;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Terminal {
+    private static final String JSON_PATH = "./data/ListOfStocks.json";
+
     private Scanner input;
     private ListOfStocks listOfStocks;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
+
+    // CITATION: Some code in this method cites lines from sample project JsonSerializationDemo,
+    //           WorkRoomApp.WorkRoomApp()
     public Terminal() {
+        jsonWriter = new JsonWriter(JSON_PATH);
+        jsonReader = new JsonReader(JSON_PATH);
         runTerminal();
     }
 
@@ -39,6 +52,8 @@ public class Terminal {
         System.out.println("\ts -> show recorded stocks");
         System.out.println("\tu -> update a stock");
         System.out.println("\td -> delete a stock");
+        System.out.println("\tw -> save stocks info to file");
+        System.out.println("\tr -> load stocks info from file");
         System.out.println("\tq -> quit");
     }
 
@@ -53,11 +68,16 @@ public class Terminal {
             doUpdateAStock();
         } else if (command.equals("d")) {
             doDeleteAStock();
+        } else if (command.equals("w")) {
+            doSaveStocks();
+        } else if (command.equals("r")) {
+            doLoadStocks();
         } else {
             System.out.println("Selection not valid...");
         }
     }
 
+    // EFFECTS: add a Stock to listOfStocks
     private void doAddStock() {
         Stock selected;
 
@@ -79,6 +99,8 @@ public class Terminal {
         printAStock(selected);
     }
 
+
+    // EFFECTS: print info of stocks currently in listOfStocks
     private void doShowAllStocks() {
         System.out.println("");
         System.out.println("Here are your currently recorded investment items:");
@@ -87,10 +109,11 @@ public class Terminal {
         }
     }
 
+    // EFFECTS: update a Stock in listOfStocks
     private void doUpdateAStock() {
         Stock selected;
         // Make displayed upper limit to index 0, if getStocks().size() is 0
-        int maxIndex = ((listOfStocks.getStocks().size() - 1) < 0) ? 0 : (listOfStocks.getStocks().size() - 1);
+        int maxIndex = Math.max((listOfStocks.getStocks().size() - 1), 0);
 
         System.out.println("");
         System.out.println("Please select the index of the item needing update (current index range is 0 - "
@@ -118,6 +141,7 @@ public class Terminal {
         }
     }
 
+    // EFFECTS: delete a Stock from listOfStocks
     private void doDeleteAStock() {
         Stock selected;
         // Make displayed upper limit to index 0, if getStocks().size() is 0
@@ -140,6 +164,31 @@ public class Terminal {
         }
     }
 
+    // EFFECTS: save info of stocks in listOfStocks into a JSON file
+    // CITATION: Some code in this method cites lines from sample project JsonSerializationDemo,
+    //           WorkRoomApp.saveWorkRoom() method
+    private void doSaveStocks() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(listOfStocks);
+            jsonWriter.close();
+            System.out.println("Saved all currently recorded stocks to " + JSON_PATH);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_PATH);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: load info of stocks in listOfStocks from a JSON file
+    private void doLoadStocks() {
+        try {
+            listOfStocks = jsonReader.read();
+            System.out.println("Loaded recorded stocks from " + JSON_PATH);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_PATH);
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: initializes scanner and an empty ListOfStock
     private void init() {
@@ -148,12 +197,13 @@ public class Terminal {
         listOfStocks = new ListOfStocks();
     }
 
+    // EFFECTS: print info of one stock
     private void printAStock(Stock st) {
-        String str = "Name: " + st.getName() + ", "
-                + "price $: " + st.getUnitPrice() + ", "
-                + "invested $: " + st.getInvestedAmount() + ", "
-                + "purchase time: " + st.getTime() + ", "
-                + "shares: " + st.getShares() + ".";
+        String str = "Stock name: " + st.getName() + ", "
+                + "unit price $: " + st.getUnitPrice() + ", "
+                + "invested total $: " + st.getInvestedAmount() + ", "
+                + "shares: " + st.getShares() + "."
+                + "date of investment: " + st.getTime() + ", ";
         System.out.println(str);
     }
 }

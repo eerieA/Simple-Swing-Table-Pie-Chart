@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a stock investment entry that has:
 //   stock name
 //   price per share, in dollars
 //   invested money, in dollars
 //   number of shares (calculated from price and invested money, rounded int)
 //   time bought, year and month
-public class Stock {
+public class Stock implements Writable {
     public static final int YEAR_MIN = 1900;
     public static final int YEAR_MAX = 9999;
     public static final int MONTH_MIN = 1;
@@ -126,11 +130,7 @@ public class Stock {
 
         setFormattedTime();
 
-        if (ydiff && mdiff) {
-            return true;
-        } else {
-            return false;
-        }
+        return ydiff && mdiff;
     }
 
     // MODIFIES: this
@@ -188,5 +188,17 @@ public class Stock {
     // EFFECTS: return the time of purchase of this investment item.
     public String getTime() {
         return time;
+    }
+
+    // EFFECTS: returns this as JSON array
+    @Override
+    public JSONArray toJson() {
+        JSONArray json = new JSONArray();
+        json.put(0, name);
+        json.put(1, unitPrice);
+        json.put(2, investedAmount);
+        json.put(3, timeYear);
+        json.put(4, timeMonth);
+        return json;
     }
 }
