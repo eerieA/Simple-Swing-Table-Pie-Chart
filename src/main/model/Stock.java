@@ -1,7 +1,6 @@
 package model;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a stock investment entry that has:

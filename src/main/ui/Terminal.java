@@ -145,7 +145,7 @@ public class Terminal {
     private void doDeleteAStock() {
         Stock selected;
         // Make displayed upper limit to index 0, if getStocks().size() is 0
-        int maxIndex = ((listOfStocks.getStocks().size() - 1) < 0) ? 0 : (listOfStocks.getStocks().size() - 1);
+        int maxIndex = Math.max((listOfStocks.getStocks().size() - 1), 0);
 
         System.out.println("");
         if ((listOfStocks.getStocks().size() > 0)) {

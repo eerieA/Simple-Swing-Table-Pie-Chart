@@ -25,7 +25,7 @@ public class JsonReader {
     public ListOfStocks read() throws IOException {
         String jsonData = readFile(source);
         JSONArray jsonArray = new JSONArray(jsonData);
-        return parseWorkRoom(jsonArray);
+        return parseListOfStock(jsonArray);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -41,7 +41,7 @@ public class JsonReader {
     }
 
     // EFFECTS: parses ListOfStocks from JSON array and returns it
-    private ListOfStocks parseWorkRoom(JSONArray jsonArray) {
+    private ListOfStocks parseListOfStock(JSONArray jsonArray) {
         ListOfStocks los = new ListOfStocks();
         addStocks(los, jsonArray);
         return los;
