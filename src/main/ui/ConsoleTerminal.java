@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Terminal {
+public class ConsoleTerminal {
     private static final String JSON_PATH = "./data/ListOfStocks.json";
 
     private Scanner input;
@@ -20,7 +20,7 @@ public class Terminal {
 
     // CITATION: Some code in this method cites lines from sample project JsonSerializationDemo,
     //           WorkRoomApp.WorkRoomApp()
-    public Terminal() {
+    public ConsoleTerminal() {
         jsonWriter = new JsonWriter(JSON_PATH);
         jsonReader = new JsonReader(JSON_PATH);
         runTerminal();
@@ -28,7 +28,7 @@ public class Terminal {
 
     private void runTerminal() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         init();
 
