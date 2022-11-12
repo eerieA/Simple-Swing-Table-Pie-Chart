@@ -2,18 +2,18 @@
     "Currently recorded stocks:",
     [
         [
-            "test4",
-            5,
-            135345,
-            3124,
-            11
+            "Sample item 1",
+            1,
+            100,
+            2001,
+            1
         ],
         [
-            "gsd",
-            5,
-            3498,
-            1111,
-            10
+            "Sample item 2",
+            1,
+            200,
+            2002,
+            2
         ]
     ]
 ]
