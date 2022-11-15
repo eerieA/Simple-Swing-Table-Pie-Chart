@@ -5,8 +5,8 @@ import java.awt.*;
 
 // This class manages split panel GUI component and its sub objects, their appearances, and their
 // event listeners
-public class SplitPanelHandler {
-    private JFrame parentGUI;
+public class MainPanelHandler {
+    private MainGUI parentGUI;
     private JSplitPane splitPane;
     private JScrollPane leftSubPane;
     private JInternalFrame rightSubPane;
@@ -15,7 +15,7 @@ public class SplitPanelHandler {
     // REQUIRES: parentGUI not null
     // EFFECTS: creates a MenuBarHandler affiliated to a parentGUI object,
     //          give this some appropriate sub objects, and set their appearances
-    public SplitPanelHandler(JFrame parentGUI, int leftWidth, int rightWidth) {
+    public MainPanelHandler(MainGUI parentGUI, int leftWidth, int rightWidth) {
         this.parentGUI = parentGUI;
 
         // Set data for the table in the left panel
@@ -30,8 +30,6 @@ public class SplitPanelHandler {
         leftSubPane.setMinimumSize(new Dimension(leftWidth, 0));
         rightSubPane.setMinimumSize(new Dimension(rightWidth, 0));
         rightSubPane.add(pie1);
-        /*GroupLayout layout = createCroupLayoutOne(rightWidth, (leftWidth + rightWidth), pie1);
-        rightSubPane.getContentPane().setLayout(layout);*/
         rightSubPane.setVisible(true);
 
         // Set main panel
@@ -78,5 +76,9 @@ public class SplitPanelHandler {
     // EFFECTS: get the SplitPane component of this
     public JSplitPane getSplitPane() {
         return splitPane;
+    }
+
+    public JTable getLeftTable() {
+        return leftTable;
     }
 }

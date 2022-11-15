@@ -1,18 +1,20 @@
 package ui;
 
+import model.ListOfStocks;
+
 import javax.swing.*;
 import java.awt.event.*;
 
 // This class manages menu bar GUI component and its sub items, their appearances,
 // and their event listeners
 public class MenuBarHandler implements ActionListener, ItemListener {
-    private JFrame parentGUI;
+    private MainGUI parentGUI;
     private JMenuBar menuBar;
 
     // REQUIRES: parentGUI not null
     // EFFECTS: creates a MenuBarHandler affiliated to a parentGUI object,
     //          and give this a Jmenubar object
-    public MenuBarHandler(JFrame parentGUI) {
+    public MenuBarHandler(MainGUI parentGUI) {
         this.parentGUI = parentGUI;
         this.menuBar = createMenuBar();
     }
@@ -32,19 +34,41 @@ public class MenuBarHandler implements ActionListener, ItemListener {
                 "The main menu in this GUI");
         menuBar.add(mainMenu);
 
-        //a group of JMenuItems under main menu
-        JMenuItem menuItem1 = new JMenuItem("Exit", KeyEvent.VK_T);
-        menuItem1.getAccessibleContext().setAccessibleDescription(
-                "This should exit the program");
-        menuItem1.addActionListener(new ActionListener() {
+        //A group of JMenuItems under main menu
+        //This item 1
+        JMenuItem menuItem1 = createAddNewStockMenuItem();
+        mainMenu.add(menuItem1);
+
+        //This is item 2
+        JMenuItem menuItem2 = createExitMenuItem();
+        mainMenu.add(menuItem2);
+
+        return menuBar;
+    }
+
+    private JMenuItem createAddNewStockMenuItem() {
+        JMenuItem menuItem = new JMenuItem("Add new stock", KeyEvent.VK_A);
+        menuItem.getAccessibleContext().setAccessibleDescription(
+                "Click this to add new stock item");
+        menuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parentGUI.createAddItemPopup();
+            }
+        });
+        return menuItem;
+    }
+
+    private JMenuItem createExitMenuItem() {
+        JMenuItem menuItem = new JMenuItem("Exit", KeyEvent.VK_E);
+        menuItem.getAccessibleContext().setAccessibleDescription(
+                "Click this to exit the program");
+        menuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Close window");
                 parentGUI.dispose();
             }
         });
-        mainMenu.add(menuItem1);
-
-        return menuBar;
+        return menuItem;
     }
 
     /**
@@ -54,7 +78,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        ;
+
     }
 
     /**
@@ -66,6 +90,6 @@ public class MenuBarHandler implements ActionListener, ItemListener {
      */
     @Override
     public void itemStateChanged(ItemEvent e) {
-        ;
+
     }
 }

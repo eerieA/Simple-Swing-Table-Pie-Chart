@@ -23,7 +23,7 @@ public class PieChart extends JComponent {
     public PieChart(int pieWidth) {
         StockDataHandler stockDataHandler = new StockDataHandler();
 
-        this.los = stockDataHandler.readFromFile();
+        this.los = stockDataHandler.getListOfStocks();
 
         this.testPercents = new ArrayList<>();
         testPercents.add(1001);

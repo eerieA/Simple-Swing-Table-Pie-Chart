@@ -1,11 +1,8 @@
 package ui;
 
 import model.ListOfStocks;
-import org.json.JSONException;
-import persistence.JsonReader;
 
 import javax.swing.table.AbstractTableModel;
-import java.io.IOException;
 
 // This class is the model for the table of stocks.
 // CITATION: some lines of code is from the TableFTFEditDemo class in
@@ -24,7 +21,12 @@ public class StockTableModel extends AbstractTableModel {
     // EFFECTS: Instantiate a StockTableModel with data read from JSON file
     public StockTableModel() {
         StockDataHandler stockDataHandler = new StockDataHandler();
-        this.los = stockDataHandler.readFromFile();
+        this.los = stockDataHandler.readFromSavedFile();
+    }
+
+    public void updateTmpData() {
+        StockDataHandler stockDataHandler = new StockDataHandler();
+        this.los = stockDataHandler.readFromTmpFile();
     }
 
     /**
