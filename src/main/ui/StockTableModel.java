@@ -29,6 +29,10 @@ public class StockTableModel extends AbstractTableModel {
         this.los = stockDataHandler.readFromTmpFile();
     }
 
+    public ListOfStocks getCurrentLos() {
+        return this.los;
+    }
+
     /**
      * Returns the number of rows in the model. A
      * <code>JTable</code> uses this method to determine how many rows it

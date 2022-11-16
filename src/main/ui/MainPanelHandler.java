@@ -1,28 +1,36 @@
 package ui;
 
+import model.ListOfStocks;
+
 import javax.swing.*;
 import java.awt.*;
 
 // This class manages split panel GUI component and its sub objects, their appearances, and their
 // event listeners
 public class MainPanelHandler {
+    private int rightWidth;
+
     private MainGUI parentGUI;
     private JSplitPane splitPane;
     private JScrollPane leftSubPane;
     private JInternalFrame rightSubPane;
     private JTable leftTable;
 
+    private ListOfStocks los;
+
     // REQUIRES: parentGUI not null
     // EFFECTS: creates a MenuBarHandler affiliated to a parentGUI object,
     //          give this some appropriate sub objects, and set their appearances
     public MainPanelHandler(MainGUI parentGUI, int leftWidth, int rightWidth) {
         this.parentGUI = parentGUI;
+        this.rightWidth = rightWidth;
 
         // Set data for the table in the left panel
+        this.los = (new StockDataHandler()).getCurrentList();
         leftTable = new JTable(new StockTableModel());
         setStockTableHeaders();
 
-        PieChart pie1 = new PieChart(rightWidth);
+        PieChart pie1 = new PieChart(rightWidth, this.los);
 
         // Set sub panels and their contents
         leftSubPane = new JScrollPane(leftTable);
@@ -73,12 +81,55 @@ public class MainPanelHandler {
         }
     }
 
+    // EFFECTS: get updated temp stocks data and pass it to relevant components
+    public void updateTmpData() {
+        StockTableModel stockTableModel = new StockTableModel();
+        stockTableModel.updateTmpData();
+        getLeftTable().setModel(stockTableModel);
+        setStockTableHeaders();
+
+        StockDataHandler stockDataHandler = new StockDataHandler();
+        this.los = stockDataHandler.readFromTmpFile();
+        PieChart pie = new PieChart(this.rightWidth, this.los);
+        getRightSubPane().getContentPane().removeAll();
+        getRightSubPane().add(pie);
+        getRightSubPane().updateUI();
+    }
+
+    // EFFECTS: get previously saved stocks data and pass it to relevant components
+    //TODO: extract a parent method
+    public void updateSavedData() {
+        StockTableModel stockTableModel = new StockTableModel();
+        getLeftTable().setModel(stockTableModel);
+        setStockTableHeaders();
+
+        this.los = stockTableModel.getCurrentLos();
+        PieChart pie = new PieChart(this.rightWidth, this.los);
+        getRightSubPane().getContentPane().removeAll();
+        getRightSubPane().add(pie);
+        getRightSubPane().updateUI();
+    }
+
+    public ListOfStocks getCurrentLos() {
+        return los;
+    }
+
     // EFFECTS: get the SplitPane component of this
     public JSplitPane getSplitPane() {
         return splitPane;
     }
 
+    // EFFECTS: get the leftTable component of this
     public JTable getLeftTable() {
         return leftTable;
+    }
+
+    // EFFECTS: get the rightSubPane component of this
+    public JInternalFrame getRightSubPane() {
+        return rightSubPane;
+    }
+
+    private void updateData() {
+        ;
     }
 }

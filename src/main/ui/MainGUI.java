@@ -1,5 +1,7 @@
 package ui;
 
+import model.ListOfStocks;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -48,11 +50,16 @@ public class MainGUI extends JFrame {
         AddOneItemPopup addOneItemPopup = new AddOneItemPopup(this, width, height, position);
     }
 
-    public void updateTableData() {
-        StockTableModel stockTableModel = new StockTableModel();
-        stockTableModel.updateTmpData();
-        mainPanelHandler.getLeftTable().setModel(stockTableModel);
-        mainPanelHandler.setStockTableHeaders();
+    public void updateTmpData() {
+        mainPanelHandler.updateTmpData();
+    }
+
+    public void updateSavedData() {
+        mainPanelHandler.updateSavedData();
+    }
+
+    public ListOfStocks getCurrentLos() {
+        return mainPanelHandler.getCurrentLos();
     }
 
     // EFFECTS: provide main entry for the entire program by creating the main GUI

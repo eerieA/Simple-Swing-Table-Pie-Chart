@@ -1,26 +1,4 @@
 [
     "Currently recorded stocks:",
-    [
-        [
-            "Sample item 1",
-            1,
-            100,
-            2001,
-            1
-        ],
-        [
-            "Sample item 2",
-            1,
-            200,
-            2002,
-            2
-        ],
-        [
-            "Input stock name",
-            -1,
-            -1,
-            -1,
-            -1
-        ]
-    ]
+    []
 ]

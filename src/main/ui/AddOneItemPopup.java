@@ -108,10 +108,10 @@ public class AddOneItemPopup extends JFrame {
     private void addOneStockFromFields(ArrayList<JTextField> txtFields) {
         ArrayList<String> strings = collectTextFields(txtFields);
         Stock stock = convertToStock(strings);
-        stockDataHandler.readFromTmpFile();
+
         stockDataHandler.addStockToCurrentList(stock);
         stockDataHandler.writeToTmpFile();
-        parentGUI.updateTableData();
+        parentGUI.updateTmpData();
     }
 
     private Stock convertToStock(ArrayList<String> collectedStrings) {

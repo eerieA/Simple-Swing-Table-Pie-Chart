@@ -20,7 +20,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a Jmenubar with menu items
+    // EFFECTS: creates a JMenubar with menu items
     public JMenuBar createMenuBar() {
         JMenuBar menuBar;
         JMenu mainMenu;
@@ -40,34 +40,70 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         mainMenu.add(menuItem1);
 
         //This is item 2
-        JMenuItem menuItem2 = createExitMenuItem();
+        JMenuItem menuItem2 = createSaveFileMenuItem();
         mainMenu.add(menuItem2);
+
+        //This is item 3
+        JMenuItem menuItem3 = createLoadFileMenuItem();
+        mainMenu.add(menuItem3);
+
+        //This is item 4
+        JMenuItem menuItem4 = createExitMenuItem();
+        mainMenu.add(menuItem4);
 
         return menuBar;
     }
 
     private JMenuItem createAddNewStockMenuItem() {
-        JMenuItem menuItem = new JMenuItem("Add new stock", KeyEvent.VK_A);
-        menuItem.getAccessibleContext().setAccessibleDescription(
-                "Click this to add new stock item");
-        menuItem.addActionListener(new ActionListener() {
+        ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 parentGUI.createAddItemPopup();
             }
-        });
-        return menuItem;
+        };
+        return createMenuItem("Add new stock", "Click this to add new stock item", listener);
+    }
+
+    private JMenuItem createSaveFileMenuItem() {
+        ActionListener listener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                StockDataHandler stockDataHandler = new StockDataHandler();
+                ListOfStocks los = stockDataHandler.readFromTmpFile();
+                stockDataHandler.writeToSavedFile(los);
+            }
+        };
+
+        return createMenuItem("Save to file", "Click this to save current data to file", listener);
+    }
+
+    private JMenuItem createLoadFileMenuItem() {
+        ActionListener listener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                StockDataHandler stockDataHandler = new StockDataHandler();
+
+                stockDataHandler.clearTmpFile();
+                parentGUI.updateSavedData();
+            }
+        };
+        return createMenuItem("Load last saved", "Click this to load last saved stock item", listener);
     }
 
     private JMenuItem createExitMenuItem() {
-        JMenuItem menuItem = new JMenuItem("Exit", KeyEvent.VK_E);
-        menuItem.getAccessibleContext().setAccessibleDescription(
-                "Click this to exit the program");
-        menuItem.addActionListener(new ActionListener() {
+        ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Close window");
                 parentGUI.dispose();
             }
-        });
+        };
+
+        return createMenuItem("Exit", "Click this to exit the program", listener);
+    }
+
+    private JMenuItem createMenuItem(String text, String accText, ActionListener listener) {
+        JMenuItem menuItem = new JMenuItem(text);
+
+        menuItem.getAccessibleContext().setAccessibleDescription(accText);
+        menuItem.addActionListener(listener);
+
         return menuItem;
     }
 

@@ -14,23 +14,12 @@ import java.util.stream.IntStream;
 
 public class PieChart extends JComponent {
     private int pieWidth;
-    private ListOfStocks los;
-    private ArrayList<Integer> testPercents;
     private ArrayList<Float> percents;
 
     // REQUIRES: pieWidth >= 0
     // EFFECTS: instantiate an empty PieChart, but with data acquired from outside this class
-    public PieChart(int pieWidth) {
-        StockDataHandler stockDataHandler = new StockDataHandler();
-
-        this.los = stockDataHandler.getListOfStocks();
-
-        this.testPercents = new ArrayList<>();
-        testPercents.add(1001);
-        testPercents.add(200);
-        //testValues.add(300);
+    public PieChart(int pieWidth, ListOfStocks los) {
         this.percents = convertToPercents(extractInvestValues(los));
-
         this.pieWidth = pieWidth;
     }
 
@@ -60,7 +49,9 @@ public class PieChart extends JComponent {
             builder.fill(area);
         } else {
             // This means there is at least one stock
+
             int i = 2;
+            float sectorStart = percents.get(1);
 
             // Paint the 1st area from .0f to the first non-zero percent value, which is percents.get(1)
             Area areaStart = createArea(.0f, percents.get(1));
@@ -69,11 +60,13 @@ public class PieChart extends JComponent {
 
             // Paint the rest from i = 2; if percents.size() is 2, then obviously this loop will be skipped
             while (i <= percents.size() - 1) {
-                Area area = createArea((percents.get(i - 2) + percents.get(i - 1)), percents.get(i));
-                builder.setColor(new Color(colorStart.getRed() + i * 8,
+                Area area = createArea(sectorStart, percents.get(i));
+                builder.setColor(new Color(colorStart.getRed() + i * 6,
                         colorStart.getGreen() + i * 8,
-                        colorStart.getBlue() + i * 8));
+                        colorStart.getBlue() + i * 12));
                 builder.fill(area);
+
+                sectorStart += percents.get(i);
                 i++;
             }
         }

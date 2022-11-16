@@ -26,6 +26,11 @@ public class StockDataHandler {
     }
 
     // EFFECTS: Read info of stocks from temporarily saved JSON file and return it as a ListOfStocks
+    public void writeToSavedFile(ListOfStocks newLos) {
+        writToFile(JSON_PATH, newLos);
+    }
+
+    // EFFECTS: Read info of stocks from temporarily saved JSON file and return it as a ListOfStocks
     public ListOfStocks readFromTmpFile() {
         return readFromFile(JSON_TMP_PATH);
     }
@@ -33,6 +38,10 @@ public class StockDataHandler {
     // EFFECTS: Read info of stocks from temporarily saved JSON file and return it as a ListOfStocks
     public void writeToTmpFile() {
         writToFile(JSON_TMP_PATH, currentList);
+    }
+
+    public void clearTmpFile() {
+        writToFile(JSON_TMP_PATH, new ListOfStocks());
     }
 
     // MODIFIES: this
@@ -43,7 +52,11 @@ public class StockDataHandler {
         }
     }
 
-    public ListOfStocks getListOfStocks() {
+    public void setCurrentList(ListOfStocks los) {
+        this.currentList = los;
+    }
+
+    public ListOfStocks getCurrentList() {
         return currentList;
     }
 
