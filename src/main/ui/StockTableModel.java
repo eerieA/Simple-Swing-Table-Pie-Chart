@@ -18,13 +18,9 @@ public class StockTableModel extends AbstractTableModel {
 
     private ListOfStocks los;
 
-    // EFFECTS: Instantiate a StockTableModel with data read from JSON file
+    // EFFECTS: Instantiate a StockTableModel with given data
     public StockTableModel(ListOfStocks los) {
         this.los = los;
-    }
-
-    public ListOfStocks getCurrentLos() {
-        return this.los;
     }
 
     /**

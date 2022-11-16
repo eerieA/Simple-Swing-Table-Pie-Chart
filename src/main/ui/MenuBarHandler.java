@@ -20,7 +20,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a JMenubar with menu items
+    // EFFECTS: creates a JMenubar with necessary menu items
     public JMenuBar createMenuBar() {
         JMenuBar menuBar;
         JMenu mainMenu;
@@ -54,6 +54,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         return menuBar;
     }
 
+    // EFFECTS: create th menu item for adding one new item
     private JMenuItem createAddNewStockMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -63,6 +64,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         return createMenuItem("Add new stock", "Click this to add new stock item", listener);
     }
 
+    // EFFECTS: create the menu item for saving current temp list to file
     private JMenuItem createSaveFileMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -75,6 +77,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         return createMenuItem("Save to file", "Click this to save current data to file", listener);
     }
 
+    // EFFECTS: create the menu item for loading previously saved list from file
     private JMenuItem createLoadFileMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +90,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         return createMenuItem("Load last saved", "Click this to load last saved stock item", listener);
     }
 
+    // EFFECTS: create the menu item for exiting the program entirely
     private JMenuItem createExitMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -98,6 +102,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         return createMenuItem("Exit", "Click this to exit the program", listener);
     }
 
+    // EFFECTS: create a menu item with given text, accessibility text and action listener
     private JMenuItem createMenuItem(String text, String accText, ActionListener listener) {
         JMenuItem menuItem = new JMenuItem(text);
 

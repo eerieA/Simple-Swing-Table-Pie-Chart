@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// This class manages the creation and organization of an "add new item" pop-up like JFrame
 public class AddOneItemPopup extends JFrame {
     private static final int RESERVEDHEIGHT = 60; //Height reserved for button and frames, recommend >= 60
     private static final int BUTTONHEIGHT = 20; //Height reserved for button and frames, recommend >= 20
@@ -16,6 +17,8 @@ public class AddOneItemPopup extends JFrame {
     private Dimension dimension;
     private StockDataHandler stockDataHandler;
 
+    // EFFECTS: instantiate a AddOneItemPopup, set its parent GUI, size, location, default behaviours
+    //          and necessary children components
     public AddOneItemPopup(MainGUI parentGUI, int width, int height, Dimension position) {
         super("Add a new stock item");
 
@@ -105,6 +108,10 @@ public class AddOneItemPopup extends JFrame {
         return strings;
     }
 
+    // MODIFIES: this; the current MainPanelHandler (under parentGUI)
+    // EFFECTS: collect inputted strings from the text fields and convert them to one stock object,
+    //          add the new stock item to a temp file,
+    //          and request relevant components to update data display.
     private void addOneStockFromFields(ArrayList<JTextField> txtFields) {
         ArrayList<String> strings = collectTextFields(txtFields);
         Stock stock = convertToStock(strings);
@@ -114,6 +121,7 @@ public class AddOneItemPopup extends JFrame {
         parentGUI.updateTmpData();
     }
 
+    // EFFECTS: convert array of strings to one stock object
     private Stock convertToStock(ArrayList<String> collectedStrings) {
         Stock stock = new Stock("null", -1, -1, -1, -1);
 

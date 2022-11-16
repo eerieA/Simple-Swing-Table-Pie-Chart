@@ -12,12 +12,13 @@ import java.util.Arrays;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
+// This class handles the graphics that simulates a pie chart and the JComponent that holds it
 public class PieChart extends JComponent {
     private int pieWidth;
     private ArrayList<Float> percents;
 
     // REQUIRES: pieWidth >= 0
-    // EFFECTS: instantiate an empty PieChart, but with data acquired from outside this class
+    // EFFECTS: instantiate a PieChart with given data
     public PieChart(int pieWidth, ListOfStocks los) {
         this.percents = convertToPercents(extractInvestValues(los));
         this.pieWidth = pieWidth;
