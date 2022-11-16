@@ -19,14 +19,8 @@ public class StockTableModel extends AbstractTableModel {
     private ListOfStocks los;
 
     // EFFECTS: Instantiate a StockTableModel with data read from JSON file
-    public StockTableModel() {
-        StockDataHandler stockDataHandler = new StockDataHandler();
-        this.los = stockDataHandler.readFromSavedFile();
-    }
-
-    public void updateTmpData() {
-        StockDataHandler stockDataHandler = new StockDataHandler();
-        this.los = stockDataHandler.readFromTmpFile();
+    public StockTableModel(ListOfStocks los) {
+        this.los = los;
     }
 
     public ListOfStocks getCurrentLos() {

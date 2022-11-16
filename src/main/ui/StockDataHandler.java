@@ -52,9 +52,10 @@ public class StockDataHandler {
         }
     }
 
+    /*
     public void setCurrentList(ListOfStocks los) {
         this.currentList = los;
-    }
+    } */
 
     public ListOfStocks getCurrentList() {
         return currentList;

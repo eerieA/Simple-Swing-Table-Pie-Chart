@@ -1,7 +1,5 @@
 package ui;
 
-import model.ListOfStocks;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -41,6 +39,7 @@ public class MainGUI extends JFrame {
         this.setResizable(false);
     }
 
+    // EFFECTS: create AddItemPopup so that user can add one new stock item
     public void createAddItemPopup() {
         int width = WIDTH / 2;
         int height = HEIGHT / 2;
@@ -50,16 +49,14 @@ public class MainGUI extends JFrame {
         AddOneItemPopup addOneItemPopup = new AddOneItemPopup(this, width, height, position);
     }
 
+    // EFFECTS: pass along request to update temp stock data to mainPanelHandler
     public void updateTmpData() {
         mainPanelHandler.updateTmpData();
     }
 
+    // EFFECTS: pass along request to load saved stock data to mainPanelHandler
     public void updateSavedData() {
         mainPanelHandler.updateSavedData();
-    }
-
-    public ListOfStocks getCurrentLos() {
-        return mainPanelHandler.getCurrentLos();
     }
 
     // EFFECTS: provide main entry for the entire program by creating the main GUI

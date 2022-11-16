@@ -27,7 +27,7 @@ public class MainPanelHandler {
 
         // Set data for the table in the left panel
         this.los = (new StockDataHandler()).getCurrentList();
-        leftTable = new JTable(new StockTableModel());
+        leftTable = new JTable(new StockTableModel((new StockDataHandler()).readFromSavedFile()));
         setStockTableHeaders();
 
         PieChart pie1 = new PieChart(rightWidth, this.los);
@@ -83,31 +83,20 @@ public class MainPanelHandler {
 
     // EFFECTS: get updated temp stocks data and pass it to relevant components
     public void updateTmpData() {
-        StockTableModel stockTableModel = new StockTableModel();
-        stockTableModel.updateTmpData();
-        getLeftTable().setModel(stockTableModel);
-        setStockTableHeaders();
-
         StockDataHandler stockDataHandler = new StockDataHandler();
         this.los = stockDataHandler.readFromTmpFile();
-        PieChart pie = new PieChart(this.rightWidth, this.los);
-        getRightSubPane().getContentPane().removeAll();
-        getRightSubPane().add(pie);
-        getRightSubPane().updateUI();
+
+        updateDataForTableAndPie(this.rightWidth, this.los);
+
     }
 
     // EFFECTS: get previously saved stocks data and pass it to relevant components
-    //TODO: extract a parent method
     public void updateSavedData() {
-        StockTableModel stockTableModel = new StockTableModel();
-        getLeftTable().setModel(stockTableModel);
-        setStockTableHeaders();
+        StockDataHandler stockDataHandler = new StockDataHandler();
+        this.los = stockDataHandler.readFromSavedFile();
 
-        this.los = stockTableModel.getCurrentLos();
-        PieChart pie = new PieChart(this.rightWidth, this.los);
-        getRightSubPane().getContentPane().removeAll();
-        getRightSubPane().add(pie);
-        getRightSubPane().updateUI();
+        updateDataForTableAndPie(this.rightWidth, this.los);
+
     }
 
     public ListOfStocks getCurrentLos() {
@@ -129,7 +118,17 @@ public class MainPanelHandler {
         return rightSubPane;
     }
 
-    private void updateData() {
-        ;
+    // REQUIRES: pieWidth > 0; los not null
+    // EFFECTS: pass given stocks data to relevant components, regenerate them, and add them to corresponding
+    //          panels
+    private void updateDataForTableAndPie(int pieWidth, ListOfStocks los) {
+        StockTableModel stockTableModel = new StockTableModel(los);
+        getLeftTable().setModel(stockTableModel);
+        setStockTableHeaders();
+
+        PieChart pie = new PieChart(pieWidth, los);
+        getRightSubPane().getContentPane().removeAll();
+        getRightSubPane().add(pie);
+        getRightSubPane().updateUI();
     }
 }
