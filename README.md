@@ -17,3 +17,11 @@ User stories:
 - As a user, I want to load the file I saved last time.
 - *(Stretch goal)* As a user, I may want to see pie charts for 2-3 months juxtaposed together for comparison.
 - *(Stretch goal)* As a user, I may want to see an alternate chart of the same month, but with stocks categorized by sectors.
+
+## Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by: Main menu -> Add new stock.<br>![image01](imgs/GradeCriteria01.gif)
+- You can generate the second required event related to adding Xs to a Y by: right-click on a row -> Delete. <br>![image02](imgs/GradeCriteria02.jpg) <br>*(Currently right-click does not select a row. Sorry about that.)*
+- You can locate my visual component by: looking at the right side of the window, where there is pie chart graphics.
+- You can save the state of my application by: Main menu -> Save to file.<br>*(Currently there is no GUI for successful saving. Sorry about that.)*
+- You can reload the state of my application by: Main menu -> Load last saved.
