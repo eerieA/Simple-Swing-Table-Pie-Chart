@@ -65,6 +65,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
     }
 
     // EFFECTS: create the menu item for saving current temp list to file
+    //TODO: pop up a panel or sth notifying the user about successfully saved to hard drive
     private JMenuItem createSaveFileMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {

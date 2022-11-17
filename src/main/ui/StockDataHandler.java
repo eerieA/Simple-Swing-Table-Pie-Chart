@@ -53,10 +53,9 @@ public class StockDataHandler {
         }
     }
 
-    /*
     public void setCurrentList(ListOfStocks los) {
         this.currentList = los;
-    } */
+    }
 
     // EFFECTS: return the current temporary list of stocks
     public ListOfStocks getCurrentList() {

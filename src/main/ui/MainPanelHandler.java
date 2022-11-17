@@ -3,7 +3,10 @@ package ui;
 import model.ListOfStocks;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.*;
 
 // This class manages split panel GUI component and its sub objects, their appearances, and their
 // event listeners
@@ -28,6 +31,7 @@ public class MainPanelHandler {
         // Set data for the table in the left panel
         this.los = (new StockDataHandler()).getCurrentList();
         leftTable = new JTable(new StockTableModel((new StockDataHandler()).readFromSavedFile()));
+        leftTable.getSelectionModel().addListSelectionListener(new RowListener());
         setStockTableHeaders();
 
         PieChart pie1 = new PieChart(rightWidth, this.los);
@@ -99,10 +103,6 @@ public class MainPanelHandler {
 
     }
 
-    public ListOfStocks getCurrentLos() {
-        return los;
-    }
-
     // EFFECTS: get the SplitPane component of this
     public JSplitPane getSplitPane() {
         return splitPane;
@@ -130,5 +130,77 @@ public class MainPanelHandler {
         getRightSubPane().getContentPane().removeAll();
         getRightSubPane().add(pie);
         getRightSubPane().updateUI();
+    }
+
+    // REQUIRES: row >= 0 and row <= size of current los - 1
+    // EFFECTS: create a popup menu when user right-click a table row, and provide menu item to delete one item
+    private JPopupMenu createRowPopup(int row) {
+        JPopupMenu popup = new JPopupMenu();
+        JMenuItem menuItem = new JMenuItem("Delete");
+
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Row: " + row);
+                removeFromTempData(row);
+            }
+        });
+        popup.add(menuItem);
+
+        return popup;
+    }
+
+    // REQUIRES: index >= 0 and index <= size of current los - 1
+    // EFFECTS: remove the stock at the given index from current temp los, and update the temp file
+    private void removeFromTempData(int index) {
+        StockDataHandler stockDataHandler = new StockDataHandler();
+
+        this.los.getStocks().remove(index);
+        updateDataForTableAndPie(this.rightWidth, this.los);
+
+        stockDataHandler.setCurrentList(this.los);
+        stockDataHandler.writeToTmpFile();
+    }
+
+    // This class is a helper class to create a ListSelectionListener that enables row interaction events in the table
+    // CITATION: some lines in this class is taken from TableSelectionDemo sample project
+    // https://docs.oracle.com/javase/tutorial/uiswing/examples/zipfiles/components-TableSelectionDemoProject.zip
+    private class RowListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent event) {
+            // This conditional is to skip events like the values are being changed
+            // if there is no such check, the following code will execute even when loading data
+            if (event.getValueIsAdjusting()) {
+                return;
+            }
+
+            MouseListener popupListener = new PopupListener(createRowPopup(leftTable.getSelectedRow()));
+            leftTable.addMouseListener(popupListener);
+        }
+    }
+
+    // This class is a helper class to create a MouseAdapter that enables a popup menu at the position of a row
+    // CITATION: some lines in this class is taken from TableSelectionDemo sample project
+    // https://docs.oracle.com/javase/tutorial/uiswing/examples/zipfiles/components-TableSelectionDemoProject.zip
+    private class PopupListener extends MouseAdapter {
+        JPopupMenu popup;
+
+        PopupListener(JPopupMenu popupMenu) {
+            popup = popupMenu;
+        }
+
+        public void mousePressed(MouseEvent e) {
+            maybeShowPopup(e);
+        }
+
+        public void mouseReleased(MouseEvent e) {
+            maybeShowPopup(e);
+        }
+
+        private void maybeShowPopup(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                popup.show(e.getComponent(),
+                        e.getX(), e.getY());
+            }
+        }
     }
 }
