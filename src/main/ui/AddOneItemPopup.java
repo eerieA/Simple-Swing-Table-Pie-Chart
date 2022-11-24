@@ -118,6 +118,7 @@ public class AddOneItemPopup extends JFrame {
 
         stockDataHandler.addStockToCurrentList(stock);
         stockDataHandler.writeToTmpFile();
+        // TODO: fix the bug of resuming old temp file after clicking add button
         parentGUI.updateTmpData();
     }
 

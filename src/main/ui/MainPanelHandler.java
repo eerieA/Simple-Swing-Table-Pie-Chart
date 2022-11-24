@@ -1,6 +1,9 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.ListOfStocks;
+import model.Stock;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -155,7 +158,8 @@ public class MainPanelHandler {
     private void removeFromTempData(int index) {
         StockDataHandler stockDataHandler = new StockDataHandler();
 
-        this.los.getStocks().remove(index);
+        this.los.deleteStock(index);
+
         updateDataForTableAndPie(this.rightWidth, this.los);
 
         stockDataHandler.setCurrentList(this.los);

@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.ListOfStocks;
 import model.Stock;
 import org.json.JSONException;
@@ -50,6 +52,9 @@ public class StockDataHandler {
     public void addStockToCurrentList(Stock stock) {
         if (stock != null) {
             this.currentList.addStock(stock);
+            //TODO: complete event-logger action to this
+            EventLog.getInstance().logEvent(new Event("Added one stock: " + stock.getName()));
+            System.out.println(EventLog.getInstance().iterator().next().getDescription());
         }
     }
 
