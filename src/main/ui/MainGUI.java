@@ -1,7 +1,12 @@
 package ui;
 
+import model.EventLog;
+import model.ListOfStocks;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // This class assembles the main JFrame and all sub objects, manage them, and provide main entry for
 // the entire program
@@ -26,7 +31,8 @@ public class MainGUI extends JFrame {
                 Math.round(WIDTH * LEFTPANELMINRATIO), Math.round(WIDTH * (1 - LEFTPANELMINRATIO)));
 
         //Set some parameters of the window.
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new MainCloseListener());
         this.setSize(WIDTH,HEIGHT);
 
         //Set components of the window
@@ -49,6 +55,10 @@ public class MainGUI extends JFrame {
         AddOneItemPopup addOneItemPopup = new AddOneItemPopup(this, width, height, position);
     }
 
+    public ListOfStocks getTmpDataFromTable() {
+        return mainPanelHandler.getCurrentList();
+    }
+
     // EFFECTS: pass along request to update temp stock data to mainPanelHandler
     public void updateTmpData() {
         mainPanelHandler.updateTmpData();
@@ -62,5 +72,20 @@ public class MainGUI extends JFrame {
     // EFFECTS: provide main entry for the entire program by creating the main GUI
     public static void main(String[] args) {
         new MainGUI();
+    }
+
+    protected static void onExit() {
+        System.out.println("Closing..." + "\n");
+        System.out.println("Logged events: ");
+        EventLog.getInstance().iterator().forEachRemaining(event ->
+                System.out.println(event.getDescription()));
+        System.exit(0);
+    }
+
+    private static class MainCloseListener extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            MainGUI.onExit();
+        }
     }
 }

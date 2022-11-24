@@ -24,9 +24,7 @@ public class ListOfStocks implements Writable {
     // MODIFIES: this.
     // EFFECTS: delete an investment item of the given stock name from the list.
     public void deleteStock(int id) {
-        Stock removed = stocks.remove(id);
-        EventLog.getInstance().logEvent(new Event("Removed one stock: " + removed.getName()));
-        EventLog.getInstance().printEvents();
+        stocks.remove(id);
     }
 
     // EFFECTS: return all stocks currently in this list.

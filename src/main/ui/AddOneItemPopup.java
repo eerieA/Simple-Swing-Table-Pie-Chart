@@ -1,6 +1,8 @@
 package ui;
 
+import model.ListOfStocks;
 import model.Stock;
+import model.StockDataHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -116,9 +118,11 @@ public class AddOneItemPopup extends JFrame {
         ArrayList<String> strings = collectTextFields(txtFields);
         Stock stock = convertToStock(strings);
 
-        stockDataHandler.addStockToCurrentList(stock);
+        ListOfStocks los = parentGUI.getTmpDataFromTable();
+        los.addStock(stock);
+
+        stockDataHandler.updateCurrentList(los, 1, stock);
         stockDataHandler.writeToTmpFile();
-        // TODO: fix the bug of resuming old temp file after clicking add button
         parentGUI.updateTmpData();
     }
 
@@ -147,7 +151,7 @@ public class AddOneItemPopup extends JFrame {
         try {
             result = Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            System.out.println("Illegal input in AddOneItemPopup :: convertToStock()");
+            //System.out.println("Illegal input in AddOneItemPopup :: convertToStock()");
         }
 
         return result;

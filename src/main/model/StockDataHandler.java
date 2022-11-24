@@ -1,15 +1,13 @@
-package ui;
+package model;
 
-import model.Event;
-import model.EventLog;
-import model.ListOfStocks;
-import model.Stock;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.IOException;
+import java.util.Calendar;
 
+// TODO: possibly write some unit tests for this class
 // This class is for handling stocks data from various sources, and providing methods for shared accessing
 public class StockDataHandler {
     private static final String JSON_PATH = "./data/ListOfStocks.json";
@@ -47,19 +45,24 @@ public class StockDataHandler {
         writToFile(JSON_TMP_PATH, new ListOfStocks());
     }
 
+    // REQUIRES: stock not null
     // MODIFIES: this
-    // EFFECTS: add a stock to the list of stocks
-    public void addStockToCurrentList(Stock stock) {
-        if (stock != null) {
-            this.currentList.addStock(stock);
-            //TODO: complete event-logger action to this
-            EventLog.getInstance().logEvent(new Event("Added one stock: " + stock.getName()));
-            System.out.println(EventLog.getInstance().iterator().next().getDescription());
-        }
-    }
-
-    public void setCurrentList(ListOfStocks los) {
+    // EFFECTS: add or delete a stock to the list of stocks
+    public void updateCurrentList(ListOfStocks los, int op, Stock stock) {
+        // op = 1 means add a stock; op = 2 means delete a stock
         this.currentList = los;
+
+        switch (op) {
+            case 1:
+                EventLog.getInstance().logEvent(new Event(Calendar.getInstance().getTimeInMillis()
+                        + " User added one stock: " + stock.getName()));
+                //System.out.println(EventLog.getInstance().iterator().next().getDescription());
+                break;
+            default:
+                EventLog.getInstance().logEvent(new Event(Calendar.getInstance().getTimeInMillis()
+                        + " User deleted one stock: " + stock.getName()));
+                break;
+        }
     }
 
     // EFFECTS: return the current temporary list of stocks

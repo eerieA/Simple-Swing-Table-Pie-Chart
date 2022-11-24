@@ -1,6 +1,7 @@
 package ui;
 
 import model.ListOfStocks;
+import model.StockDataHandler;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -95,8 +96,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
     private JMenuItem createExitMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Close window");
-                parentGUI.dispose();
+                MainGUI.onExit();
             }
         };
 

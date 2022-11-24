@@ -1,9 +1,6 @@
 package ui;
 
-import model.Event;
-import model.EventLog;
-import model.ListOfStocks;
-import model.Stock;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -32,6 +29,7 @@ public class MainPanelHandler {
         this.rightWidth = rightWidth;
 
         // Set data for the table in the left panel
+        (new StockDataHandler()).clearTmpFile();
         this.los = (new StockDataHandler()).getCurrentList();
         leftTable = new JTable(new StockTableModel((new StockDataHandler()).readFromSavedFile()));
         leftTable.getSelectionModel().addListSelectionListener(new RowListener());
@@ -121,6 +119,10 @@ public class MainPanelHandler {
         return rightSubPane;
     }
 
+    public ListOfStocks getCurrentList() {
+        return this.los;
+    }
+
     // REQUIRES: pieWidth > 0; los not null
     // EFFECTS: pass given stocks data to relevant components, regenerate them, and add them to corresponding
     //          panels
@@ -158,11 +160,12 @@ public class MainPanelHandler {
     private void removeFromTempData(int index) {
         StockDataHandler stockDataHandler = new StockDataHandler();
 
-        this.los.deleteStock(index);
+        Stock removed = this.los.getStocks().remove(index);
+        //this.los.deleteStock(index);
 
         updateDataForTableAndPie(this.rightWidth, this.los);
 
-        stockDataHandler.setCurrentList(this.los);
+        stockDataHandler.updateCurrentList(this.los, 2, removed);
         stockDataHandler.writeToTmpFile();
     }
 

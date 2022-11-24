@@ -62,8 +62,9 @@ public class EventLog implements Iterable<Event> {
         return events.iterator();
     }
 
-    //TODO: delete this method
+    /*
     public void printEvents() {
+        System.out.println("Logged events: ");
         events.iterator().forEachRemaining(event -> System.out.println(event.getDescription()));
-    }
+    } */
 }
