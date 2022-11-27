@@ -9,11 +9,10 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// TODO: add more unit tests if have time
 public class StockDataHandlerTest {
     private static final String JSON_PATH = "./data/ListOfStocks.json";
     private static final String JSON_TMP_PATH = "./data/tmp.json";
-    private static final String JSON_TMP_PATH_FOR_TEST = "./data/TestSDHTmpFile.json";
+    //private static final String JSON_TMP_PATH_FOR_TEST = "./data/TestSDHTmpFile.json";
 
     private JsonReader savedFile;
     private JsonReader tmpFile;
