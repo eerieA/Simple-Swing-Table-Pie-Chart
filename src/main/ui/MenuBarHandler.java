@@ -1,7 +1,7 @@
 package ui;
 
 import model.ListOfStocks;
-import model.StockDataHandler;
+import persistence.StockDataHandler;
 
 import javax.swing.*;
 import java.awt.event.*;

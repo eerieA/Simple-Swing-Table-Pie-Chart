@@ -2,7 +2,7 @@ package ui;
 
 import model.ListOfStocks;
 import model.Stock;
-import model.StockDataHandler;
+import persistence.StockDataHandler;
 
 import javax.swing.*;
 import java.awt.*;

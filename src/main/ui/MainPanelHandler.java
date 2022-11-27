@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import persistence.StockDataHandler;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -29,9 +30,10 @@ public class MainPanelHandler {
         this.rightWidth = rightWidth;
 
         // Set data for the table in the left panel
-        (new StockDataHandler()).clearTmpFile();
-        this.los = (new StockDataHandler()).getCurrentList();
-        leftTable = new JTable(new StockTableModel((new StockDataHandler()).readFromSavedFile()));
+        StockDataHandler stockDataHandler = new StockDataHandler();
+        stockDataHandler.clearTmpFile();
+        this.los = stockDataHandler.getCurrentList();
+        leftTable = new JTable(new StockTableModel(this.los));
         leftTable.getSelectionModel().addListSelectionListener(new RowListener());
         setStockTableHeaders();
 
@@ -160,8 +162,8 @@ public class MainPanelHandler {
     private void removeFromTempData(int index) {
         StockDataHandler stockDataHandler = new StockDataHandler();
 
-        Stock removed = this.los.getStocks().remove(index);
-        //this.los.deleteStock(index);
+        Stock removed = this.los.getStocks().get(index);
+        this.los.deleteStock(index);
 
         updateDataForTableAndPie(this.rightWidth, this.los);
 

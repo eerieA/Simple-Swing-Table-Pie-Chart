@@ -1,5 +1,9 @@
-package model;
+package persistence;
 
+import model.Event;
+import model.EventLog;
+import model.ListOfStocks;
+import model.Stock;
 import org.json.JSONException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -7,7 +11,6 @@ import persistence.JsonWriter;
 import java.io.IOException;
 import java.util.Calendar;
 
-// TODO: possibly write some unit tests for this class
 // This class is for handling stocks data from various sources, and providing methods for shared accessing
 public class StockDataHandler {
     private static final String JSON_PATH = "./data/ListOfStocks.json";
@@ -17,11 +20,13 @@ public class StockDataHandler {
 
     // EFFECTS: Instantiate a StockDataHandler with previously saved list of stocks
     public StockDataHandler() {
+        EventLog.getInstance().logEvent(new Event("System loading initial list..."));
         this.currentList = readFromSavedFile();
     }
 
     // EFFECTS: Read info of stocks from previously saved JSON file and return it as a ListOfStocks
     public ListOfStocks readFromSavedFile() {
+        EventLog.getInstance().logEvent(new Event("System reading saved list.."));
         return readFromFile(JSON_PATH);
     }
 
@@ -32,6 +37,7 @@ public class StockDataHandler {
 
     // EFFECTS: Read info of stocks from temporarily saved JSON file and return it as a ListOfStocks
     public ListOfStocks readFromTmpFile() {
+        EventLog.getInstance().logEvent(new Event("System reading temp list.."));
         return readFromFile(JSON_TMP_PATH);
     }
 
@@ -55,12 +61,12 @@ public class StockDataHandler {
         switch (op) {
             case 1:
                 EventLog.getInstance().logEvent(new Event(Calendar.getInstance().getTimeInMillis()
-                        + " User added one stock: " + stock.getName()));
+                        + " Since user requested adding stock: " + stock.getName()));
                 //System.out.println(EventLog.getInstance().iterator().next().getDescription());
                 break;
             default:
                 EventLog.getInstance().logEvent(new Event(Calendar.getInstance().getTimeInMillis()
-                        + " User deleted one stock: " + stock.getName()));
+                        + " Since user requested deleting stock: " + stock.getName()));
                 break;
         }
     }

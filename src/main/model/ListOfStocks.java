@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 // Represents a list of instantiated Stock objects
 public class ListOfStocks implements Writable {
@@ -19,12 +20,15 @@ public class ListOfStocks implements Writable {
     // EFFECTS: add a stock to the list.
     public void addStock(Stock s) {
         stocks.add(s);
+        EventLog.getInstance().logEvent(new Event("System loaded one stock: " + s.getName()));
     }
 
     // MODIFIES: this.
     // EFFECTS: delete an investment item of the given stock name from the list.
     public void deleteStock(int id) {
-        stocks.remove(id);
+        Stock removed = stocks.remove(id);
+        EventLog.getInstance().logEvent(new Event(Calendar.getInstance().getTimeInMillis()
+                + " System deleted one stock: " + removed.getName()));
     }
 
     // EFFECTS: return all stocks currently in this list.
