@@ -29,10 +29,13 @@ class ListOfStocksTest extends StockModelTestSuper {
         los1.addStock(st1);
         los1.addStock(st2);
         los1.addStock(st3);
+
         assertEquals(los1.getNumOfStocks(), 3);
         assertEquals(los1.getStocks().get(0).getName(), "GOGL");
         assertEquals(los1.getStocks().get(1).getName(), "APPL");
         assertEquals(los1.getStocks().get(2).getName(), "IMUX");
+
+        assertTrue(EventLog.getInstance().iterator().next().getDescription().contains("GOGL"));
     }
 
     @Test
@@ -40,10 +43,15 @@ class ListOfStocksTest extends StockModelTestSuper {
         los1.addStock(st1);
         los1.addStock(st2);
         los1.addStock(st3);
+
         assertEquals(los1.getNumOfStocks(), 3);
+
         los1.deleteStock(0);
+
         assertEquals(los1.getStocks().get(0).getName(), "APPL");
         assertEquals(los1.getStocks().get(1).getName(), "IMUX");
+
+        assertTrue(EventLog.getInstance().iterator().next().getDescription().contains("GOGL"));
     }
 
     @Test

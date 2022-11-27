@@ -5,8 +5,6 @@ import model.EventLog;
 import model.ListOfStocks;
 import model.Stock;
 import org.json.JSONException;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -62,7 +60,6 @@ public class StockDataHandler {
             case 1:
                 EventLog.getInstance().logEvent(new Event(Calendar.getInstance().getTimeInMillis()
                         + " Since user requested adding stock: " + stock.getName()));
-                //System.out.println(EventLog.getInstance().iterator().next().getDescription());
                 break;
             default:
                 EventLog.getInstance().logEvent(new Event(Calendar.getInstance().getTimeInMillis()
