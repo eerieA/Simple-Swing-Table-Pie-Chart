@@ -27,4 +27,9 @@ User stories:
 
 ## Phase 4: Task 2
 Here is a sample log printed at program exit.
+Actions performed in this sample test are:
+- Open program
+- Delete a stock (event 1 in Phase 3)
+- Add a stock (event 2 in Phase 3)
+- Exit program
 <br>![image01](imgs/P4_sampleLog.jpg)
