@@ -37,7 +37,25 @@ class StocksTest extends StockModelTestSuper {
     }
 
     @Test
-    public void testUpdateInComplete() {
+    public void testUpdateInComplete1() {
+        // Incomplete case: only month is not updated
+        // st1 = new Stock("GOGL", 1, 1, 1900, 1);
+        Stock st1_exptd2 = new Stock("GOGL2", 2, 4, 1901, 1);
+        assertEquals(st1.update("GOGL2", 2, 4, 1901, -1), 0);
+        assertTrue(isIdenticalStocks(st1, st1_exptd2));
+    }
+
+    @Test
+    public void testUpdateInComplete2() {
+        // Incomplete case: unit price and month are not updated
+        // st1 = new Stock("GOGL", 1, 1, 1900, 1);
+        Stock st1_exptd2 = new Stock("GOGL2", 1, 4, 1901, 1);
+        assertEquals(st1.update("GOGL2", -1, 4, 1901, -1), 0);
+        assertTrue(isIdenticalStocks(st1, st1_exptd2));
+    }
+
+    @Test
+    public void testUpdateInComplete3() {
         // Incomplete case: name, unit price and month are not updated
         // st1 = new Stock("GOGL", 1, 1, 1900, 1);
         Stock st1_exptd2 = new Stock("GOGL", 1, 4, 1901, 1);

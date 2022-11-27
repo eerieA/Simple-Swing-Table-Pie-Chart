@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StockDataHandlerTest {
     private static final String JSON_PATH = "./data/ListOfStocks.json";
     private static final String JSON_TMP_PATH = "./data/tmp.json";
+    private static final String JSON_TMP_PATH_FOR_TEST = "./data/TestSDHTmpFile.json";
 
     private JsonReader savedFile;
     private JsonReader tmpFile;
@@ -24,6 +25,7 @@ public class StockDataHandlerTest {
         sdh = new StockDataHandler();
         savedFile = new JsonReader(JSON_PATH);
         tmpFile = new JsonReader(JSON_TMP_PATH);
+
         stock1 = new Stock("test1", 1, 100, 2000, 1);
         stock2 = new Stock("test2", 2, 200, 2002, 2);
     }
@@ -57,6 +59,23 @@ public class StockDataHandlerTest {
             ListOfStocks sdhTmpList = sdh.readFromTmpFile();
 
             assertEquals(tmpList.getStocks().size(), sdhTmpList.getStocks().size());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    public void testWriteToTmpFile() {
+        ListOfStocks tmpList = new ListOfStocks();
+        tmpList.getStocks().add(stock1);
+        tmpList.getStocks().add(stock2);
+
+        sdh.updateCurrentList(tmpList, 1, stock2);
+        sdh.writeToTmpFile();
+
+        try {
+            ListOfStocks tmpListToCompare = tmpFile.read();
+            assertEquals(tmpListToCompare.getStocks().size(), sdh.getCurrentList().getStocks().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
