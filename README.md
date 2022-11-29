@@ -33,3 +33,13 @@ Actions performed in this sample test are:
 - Add a stock (event 2 in Phase 3)
 - Exit program
 <br>![image01](imgs/P4_sampleLog.jpg)
+
+## Phase 4: Task 3
+Here is the class design diagram below.
+![image01](/UML_Design_Diagram.jpg)
+Potential points for refactoring:
+- Split StockDataHandler to a data handling class and a data updating class
+- The data handling class could be made adhering to the Singleton pattern
+- The data updating class could be made adhering to the Observer pattern
+- Can use Composite pattern to make adding JTextField and JButton objects in the add new item window more organized
+- Aggregate those illegal input value checks into an exception control flow
