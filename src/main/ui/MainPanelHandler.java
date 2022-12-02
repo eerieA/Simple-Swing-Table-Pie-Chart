@@ -148,7 +148,7 @@ public class MainPanelHandler {
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Row: " + row);
+                //System.out.println("Row: " + row);
                 removeFromTempData(row);
             }
         });
