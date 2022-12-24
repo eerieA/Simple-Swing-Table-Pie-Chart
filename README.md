@@ -1,6 +1,6 @@
 # Personal Project - Idea
 
-**Stock portfolio pie charts**
+## Stock portfolio pie charts
 
 Basic goals proposal:
 - What will the application do? It takes inputs of stock investment data from a user, and plots pie charts for data visualization and organizing.
@@ -18,23 +18,7 @@ User stories:
 - *(Stretch goal)* As a user, I may want to see pie charts for 2-3 months juxtaposed together for comparison.
 - *(Stretch goal)* As a user, I may want to see an alternate chart of the same month, but with stocks categorized by sectors.
 
-## Instructions for Grader
-- You can generate the first required event related to adding Xs to a Y by: Main menu -> Add new stock.<br>![image01](imgs/GradeCriteria01.gif)
-- You can generate the second required event related to adding Xs to a Y by: right-click on a row -> Delete. <br>![image02](imgs/GradeCriteria02.jpg) <br>*(Currently right-click does not select a row. Sorry about that.)*
-- You can locate my visual component by: looking at the right side of the window, where there is pie chart graphics.
-- You can save the state of my application by: Main menu -> Save to file.<br>*(Currently there is no GUI for successful saving. Sorry about that.)*
-- You can reload the state of my application by: Main menu -> Load last saved.
-
-## Phase 4: Task 2
-Here is a sample log printed at program exit.
-Actions performed in this sample test are:
-- Open program
-- Delete a stock (event 1 in Phase 3)
-- Add a stock (event 2 in Phase 3)
-- Exit program
-<br>![image01](imgs/P4_sampleLog.jpg)
-
-## Phase 4: Task 3
+## Info for self: class diagram
 Here is the class design diagram below.
 ![image01](/UML_Design_Diagram.jpg)
 Potential points for refactoring:
