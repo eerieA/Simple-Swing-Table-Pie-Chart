@@ -91,7 +91,8 @@ public class MainPanelHandler {
     // EFFECTS: get updated temp stocks data and pass it to relevant components
     public void updateTmpData() {
         StockDataHandler stockDataHandler = new StockDataHandler();
-        this.los = stockDataHandler.readFromTmpFile();
+        //this.los = stockDataHandler.readFromTmpFile();
+        this.los = StockDataSingleton.getInstance().getCurrentLos(); //TODO: this is new singleton entry
 
         updateDataForTableAndPie(this.rightWidth, this.los);
 
@@ -167,8 +168,9 @@ public class MainPanelHandler {
 
         updateDataForTableAndPie(this.rightWidth, this.los);
 
-        stockDataHandler.updateCurrentList(this.los, 2, removed);
-        stockDataHandler.writeToTmpFile();
+        //stockDataHandler.updateCurrentList(this.los, 2, removed);
+        //stockDataHandler.writeToTmpFile();
+        StockDataSingleton.getInstance().removeStock(index); // TODO: this is new singleton entry
     }
 
     // This class is a helper class to create a ListSelectionListener that enables row interaction events in the table

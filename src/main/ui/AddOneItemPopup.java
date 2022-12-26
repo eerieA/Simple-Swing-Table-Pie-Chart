@@ -2,6 +2,7 @@ package ui;
 
 import model.ListOfStocks;
 import model.Stock;
+import model.StockDataSingleton;
 import persistence.StockDataHandler;
 
 import javax.swing.*;
@@ -118,11 +119,12 @@ public class AddOneItemPopup extends JFrame {
         ArrayList<String> strings = collectTextFields(txtFields);
         Stock stock = convertToStock(strings);
 
-        ListOfStocks los = parentGUI.getTmpDataFromTable();
-        los.addStock(stock);
+        //ListOfStocks los = parentGUI.getTmpDataFromTable();
+        //los.addStock(stock);
+        StockDataSingleton.getInstance().addStock(stock); // TODO: this is new singleton entry
 
-        stockDataHandler.updateCurrentList(los, 1, stock);
-        stockDataHandler.writeToTmpFile();
+        //stockDataHandler.updateCurrentList(los, 1, stock);
+        //stockDataHandler.writeToTmpFile();
         parentGUI.updateTmpData();
     }
 
@@ -138,6 +140,7 @@ public class AddOneItemPopup extends JFrame {
         stock.setInvestedAmount(safeParseIntegerForStock(collectedStrings.get(2)));
         stock.setTime(safeParseIntegerForStock(collectedStrings.get(3)),
                 safeParseIntegerForStock(collectedStrings.get(4)));
+        stock.setShares();
 
         return stock;
     }

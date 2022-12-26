@@ -1,6 +1,7 @@
 package ui;
 
 import model.ListOfStocks;
+import model.StockDataSingleton;
 import persistence.StockDataHandler;
 
 import javax.swing.*;
@@ -71,7 +72,8 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StockDataHandler stockDataHandler = new StockDataHandler();
-                ListOfStocks los = stockDataHandler.readFromTmpFile();
+                //ListOfStocks los = stockDataHandler.readFromTmpFile();
+                ListOfStocks los = StockDataSingleton.getInstance().getCurrentLos(); // TODO: this is new singleton entry
                 stockDataHandler.writeToSavedFile(los);
             }
         };

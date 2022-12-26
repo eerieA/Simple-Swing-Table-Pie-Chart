@@ -43,7 +43,7 @@ public class StockDataHandlerTest {
     public void testReadFromSavedFile() {
         try {
             ListOfStocks savedList = savedFile.read();
-            sdh.readFromTmpFile();
+            sdh.readFromSavedFile();
 
             assertEquals(savedList.getStocks().size(), sdh.getCurrentList().getStocks().size());
         } catch (IOException e) {
@@ -51,6 +51,7 @@ public class StockDataHandlerTest {
         }
     }
 
+    /*
     @Test
     public void testReadFromTmpFile() {
         try {
@@ -61,7 +62,7 @@ public class StockDataHandlerTest {
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
-    }
+    }*/
 
     @Test
     public void testWriteToTmpFile() {

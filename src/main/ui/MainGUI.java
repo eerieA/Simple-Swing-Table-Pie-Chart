@@ -2,6 +2,8 @@ package ui;
 
 import model.EventLog;
 import model.ListOfStocks;
+import model.Stock;
+import model.StockDataSingleton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,6 +74,12 @@ public class MainGUI extends JFrame {
     // EFFECTS: provide main entry for the entire program by creating the main GUI
     public static void main(String[] args) {
         new MainGUI();
+
+        //System.out.println(StockDataSingleton.getInstance().getCurrentLos().getNumOfStocks());
+
+        //Stock tmp = new Stock("singletontest", 3, 4500, 2341, 6);
+        //StockDataSingleton.getInstance().addStock(tmp);
+        //System.out.println(StockDataSingleton.getInstance().getCurrentLos().getNumOfStocks());
     }
 
     protected static void onExit() {

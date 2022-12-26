@@ -33,11 +33,12 @@ public class StockDataHandler {
         writToFile(JSON_PATH, newLos);
     }
 
+    /*
     // EFFECTS: Read info of stocks from temporarily saved JSON file and return it as a ListOfStocks
     public ListOfStocks readFromTmpFile() {
         EventLog.getInstance().logEvent(new Event("System reading temp list.."));
         return readFromFile(JSON_TMP_PATH);
-    }
+    }*/
 
     // EFFECTS: Write info of stocks to temporarily saved JSON file and return it as a ListOfStocks
     public void writeToTmpFile() {
