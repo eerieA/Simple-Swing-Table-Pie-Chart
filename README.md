@@ -16,7 +16,6 @@ User stories:
 - As a user, I want to save inputted stock info items in a file on hard drive.
 - As a user, I want to load the file I saved last time.
 - *(Stretch goal)* As a user, I may want to see pie charts for 2-3 months juxtaposed together for comparison.
-- *(Stretch goal)* As a user, I may want to see an alternate chart of the same month, but with stocks categorized by sectors.
 
 ## Info for self: class diagram
 Here is the class design diagram below.
