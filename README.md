@@ -21,8 +21,8 @@ User stories:
 Here is the class design diagram below.
 <br /> ![image01](/UML_Design_Diagram.jpg)
 <br /> Potential points for refactoring:
-- Split StockDataHandler to a data handling class and a data updating class
-- The data handling class could be made adhering to the Singleton pattern
+- Split StockDataHandler to a data handling class and a data updating class (√)
+- The data handling class could be made adhering to the Singleton pattern (√)
 - The data updating class could be made adhering to the Observer pattern
 - Maybe can use Composite pattern to make adding JTextField and JButton objects in the add new item window more organized
 - Aggregate those illegal input value checks into an exception control flow

@@ -30,9 +30,7 @@ public class MainPanelHandler {
         this.rightWidth = rightWidth;
 
         // Set data for the table in the left panel
-        StockDataHandler stockDataHandler = new StockDataHandler();
-        stockDataHandler.clearTmpFile();
-        this.los = stockDataHandler.getCurrentList();
+        this.los = StockDataSingleton.getInstance().getCurrentLos(); // this is singleton entry
         leftTable = new JTable(new StockTableModel(this.los));
         leftTable.getSelectionModel().addListSelectionListener(new RowListener());
         setStockTableHeaders();
@@ -90,12 +88,9 @@ public class MainPanelHandler {
 
     // EFFECTS: get updated temp stocks data and pass it to relevant components
     public void updateTmpData() {
-        StockDataHandler stockDataHandler = new StockDataHandler();
-        //this.los = stockDataHandler.readFromTmpFile();
-        this.los = StockDataSingleton.getInstance().getCurrentLos(); //TODO: this is new singleton entry
+        this.los = StockDataSingleton.getInstance().getCurrentLos(); // this is singleton entry
 
         updateDataForTableAndPie(this.rightWidth, this.los);
-
     }
 
     // EFFECTS: get previously saved stocks data and pass it to relevant components
@@ -161,16 +156,13 @@ public class MainPanelHandler {
     // REQUIRES: index >= 0 and index <= size of current los - 1
     // EFFECTS: remove the stock at the given index from current temp los, and update the temp file
     private void removeFromTempData(int index) {
-        StockDataHandler stockDataHandler = new StockDataHandler();
-
         Stock removed = this.los.getStocks().get(index);
-        this.los.deleteStock(index);
+
+        StockDataSingleton.getInstance().removeStock(index); // this is singleton entry
+        this.los = StockDataSingleton.getInstance().getCurrentLos();
 
         updateDataForTableAndPie(this.rightWidth, this.los);
-
-        //stockDataHandler.updateCurrentList(this.los, 2, removed);
-        //stockDataHandler.writeToTmpFile();
-        StockDataSingleton.getInstance().removeStock(index); // TODO: this is new singleton entry
+        //System.out.println(StockDataSingleton.getInstance().getCurrentLos().toJson());
     }
 
     // This class is a helper class to create a ListSelectionListener that enables row interaction events in the table

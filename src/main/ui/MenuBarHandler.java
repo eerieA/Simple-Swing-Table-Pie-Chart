@@ -72,8 +72,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StockDataHandler stockDataHandler = new StockDataHandler();
-                //ListOfStocks los = stockDataHandler.readFromTmpFile();
-                ListOfStocks los = StockDataSingleton.getInstance().getCurrentLos(); // TODO: this is new singleton entry
+                ListOfStocks los = StockDataSingleton.getInstance().getCurrentLos(); // this is singleton entry
                 stockDataHandler.writeToSavedFile(los);
             }
         };
@@ -85,9 +84,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
     private JMenuItem createLoadFileMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                StockDataHandler stockDataHandler = new StockDataHandler();
-
-                stockDataHandler.clearTmpFile();
+                StockDataSingleton.getInstance().updateSavedData(); // this is singleton entry
                 parentGUI.updateSavedData();
             }
         };

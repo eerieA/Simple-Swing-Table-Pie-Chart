@@ -28,6 +28,10 @@ public class StockDataSingleton {
         currentList.addStock(stock);
     }
 
+    public void updateSavedData() {
+        currentList = readFromFile(JSON_PATH);
+    }
+
     public void removeStock(int index) {
         currentList.deleteStock(index);
     }

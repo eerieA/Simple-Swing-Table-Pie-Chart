@@ -18,7 +18,6 @@ public class AddOneItemPopup extends JFrame {
 
     private MainGUI parentGUI;
     private Dimension dimension;
-    private StockDataHandler stockDataHandler;
 
     // EFFECTS: instantiate a AddOneItemPopup, set its parent GUI, size, location, default behaviours
     //          and necessary children components
@@ -26,7 +25,6 @@ public class AddOneItemPopup extends JFrame {
         super("Add a new stock item");
 
         this.parentGUI = parentGUI;
-        this.stockDataHandler = new StockDataHandler();
 
         this.dimension = new Dimension(width, height);
         this.setSize(dimension);
@@ -119,12 +117,8 @@ public class AddOneItemPopup extends JFrame {
         ArrayList<String> strings = collectTextFields(txtFields);
         Stock stock = convertToStock(strings);
 
-        //ListOfStocks los = parentGUI.getTmpDataFromTable();
-        //los.addStock(stock);
-        StockDataSingleton.getInstance().addStock(stock); // TODO: this is new singleton entry
+        StockDataSingleton.getInstance().addStock(stock); // this is singleton entry
 
-        //stockDataHandler.updateCurrentList(los, 1, stock);
-        //stockDataHandler.writeToTmpFile();
         parentGUI.updateTmpData();
     }
 

@@ -9,7 +9,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.Calendar;
 
-// This class is for handling stocks data from various sources, and providing methods for shared accessing
+// This class is for handling stocks data from persistence files, and providing methods for shared accessing
 public class StockDataHandler {
     private static final String JSON_PATH = "./data/ListOfStocks.json";
     private static final String JSON_TMP_PATH = "./data/tmp.json";
@@ -38,7 +38,7 @@ public class StockDataHandler {
     public ListOfStocks readFromTmpFile() {
         EventLog.getInstance().logEvent(new Event("System reading temp list.."));
         return readFromFile(JSON_TMP_PATH);
-    }*/
+    }
 
     // EFFECTS: Write info of stocks to temporarily saved JSON file and return it as a ListOfStocks
     public void writeToTmpFile() {
@@ -48,8 +48,9 @@ public class StockDataHandler {
     // EFFECTS: clear the temp file by writing an empty ListOfStocks into it
     public void clearTmpFile() {
         writToFile(JSON_TMP_PATH, new ListOfStocks());
-    }
+    }*/
 
+    /*
     // REQUIRES: stock not null
     // MODIFIES: this
     // EFFECTS: add or delete a stock to the list of stocks
@@ -67,7 +68,7 @@ public class StockDataHandler {
                         + " Since user requested deleting stock: " + stock.getName()));
                 break;
         }
-    }
+    }*/
 
     // EFFECTS: return the current temporary list of stocks
     public ListOfStocks getCurrentList() {

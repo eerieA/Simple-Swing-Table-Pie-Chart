@@ -64,6 +64,7 @@ public class StockDataHandlerTest {
         }
     }*/
 
+    /*
     @Test
     public void testWriteToTmpFile() {
         ListOfStocks tmpList = new ListOfStocks();
@@ -88,7 +89,6 @@ public class StockDataHandlerTest {
         sdh.updateCurrentList(los, 1, stock1);
 
         assertEquals(1, sdh.getCurrentList().getStocks().size());
-        //assertTrue(EventLog.getInstance().iterator().next().getDescription().contains("test1"));
     }
 
     @Test
@@ -101,6 +101,6 @@ public class StockDataHandlerTest {
         sdh.updateCurrentList(los, 2, stock2);
 
         assertEquals(1, sdh.getCurrentList().getStocks().size());
-    }
+    }*/
 
 }
