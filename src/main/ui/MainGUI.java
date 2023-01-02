@@ -7,6 +7,8 @@ import model.StockDataSingleton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -55,6 +57,32 @@ public class MainGUI extends JFrame {
                 (this.scrSize.height - height) / 2);
 
         AddOneItemPopup addOneItemPopup = new AddOneItemPopup(this, width, height, position);
+    }
+
+    public void createSaveSuccessWindow() {
+        JFrame jFrame = new JFrame("Confirm");
+        Dimension dimension = new Dimension(WIDTH / 3, HEIGHT / 3);
+        Dimension position = new Dimension((this.scrSize.width - WIDTH / 3) / 2,
+                (this.scrSize.height - HEIGHT / 3) / 2);
+
+        JPanel jPanel = new JPanel();
+        JLabel jLabel = new JLabel("Data successfully saved.");
+        JButton jButton = new JButton("Confirm");
+        jFrame.add(jPanel);
+        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
+        jPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        jPanel.add(jLabel);
+        jPanel.add(Box.createRigidArea(new Dimension(0,20))); // Add a gap; order is important
+        jPanel.add(jButton);
+        jLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jButton.addActionListener(e -> jFrame.dispose());
+
+        jFrame.setSize(dimension);
+        jFrame.setLocation(position.width, position.height);
+        jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        jFrame.setVisible(true);
+
     }
 
     public ListOfStocks getTmpDataFromTable() {

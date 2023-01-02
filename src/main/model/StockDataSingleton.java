@@ -19,7 +19,8 @@ public class StockDataSingleton {
         if(instance == null) {
             instance = new StockDataSingleton();
         }
-        System.out.println("A StockDataSingleton instance has been called.");
+
+        //System.out.println("A StockDataSingleton instance has been called."); //Debug log for a singlton being called
 
         return instance;
     }

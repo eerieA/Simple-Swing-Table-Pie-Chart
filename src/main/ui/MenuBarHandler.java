@@ -37,7 +37,7 @@ public class MenuBarHandler implements ActionListener, ItemListener {
         menuBar.add(mainMenu);
 
         //A group of JMenuItems under main menu
-        //This item 1
+        //This is item 1
         JMenuItem menuItem1 = createAddNewStockMenuItem();
         mainMenu.add(menuItem1);
 
@@ -67,13 +67,14 @@ public class MenuBarHandler implements ActionListener, ItemListener {
     }
 
     // EFFECTS: create the menu item for saving current temp list to file
-    //TODO: pop up a panel or sth notifying the user about successfully saved to hard drive
     private JMenuItem createSaveFileMenuItem() {
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StockDataHandler stockDataHandler = new StockDataHandler();
                 ListOfStocks los = StockDataSingleton.getInstance().getCurrentLos(); // this is singleton entry
                 stockDataHandler.writeToSavedFile(los);
+
+                parentGUI.createSaveSuccessWindow();
             }
         };
 

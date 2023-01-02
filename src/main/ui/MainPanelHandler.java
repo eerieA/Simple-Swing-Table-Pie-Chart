@@ -139,16 +139,17 @@ public class MainPanelHandler {
     // EFFECTS: create a popup menu when user right-click a table row, and provide menu item to delete one item
     private JPopupMenu createRowPopup(int row) {
         JPopupMenu popup = new JPopupMenu();
-        JMenuItem menuItem = new JMenuItem("Delete");
+        JMenuItem menuItem01 = new JMenuItem("Delete selected row");
 
-        menuItem.addActionListener(new ActionListener() {
+        //System.out.println(getLeftTable().isRowSelected(row)); // Debug log for right click row selection
+        menuItem01.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("Row: " + row);
+                //System.out.println("Row: " + row); // Debug log for right click row selection
                 removeFromTempData(row);
             }
         });
-        popup.add(menuItem);
+        popup.add(menuItem01);
 
         return popup;
     }
@@ -176,7 +177,9 @@ public class MainPanelHandler {
                 return;
             }
 
-            MouseListener popupListener = new PopupListener(createRowPopup(leftTable.getSelectedRow()));
+            //System.out.println("selected row:" + leftTable.getSelectedRow()); // Debug log for user selection
+
+            MouseListener popupListener = new PopupListener(createRowPopup(leftTable.getSelectedRow()), leftTable.getSelectedRow());
             leftTable.addMouseListener(popupListener);
         }
     }
@@ -186,9 +189,12 @@ public class MainPanelHandler {
     // https://docs.oracle.com/javase/tutorial/uiswing/examples/zipfiles/components-TableSelectionDemoProject.zip
     private class PopupListener extends MouseAdapter {
         JPopupMenu popup;
+        int row;
 
-        PopupListener(JPopupMenu popupMenu) {
+        PopupListener(JPopupMenu popupMenu, int row) {
+            // The input popupMenu is created by calling createRowPopup(int row)
             popup = popupMenu;
+            this.row = row;
         }
 
         public void mousePressed(MouseEvent e) {
@@ -200,7 +206,8 @@ public class MainPanelHandler {
         }
 
         private void maybeShowPopup(MouseEvent e) {
-            if (e.isPopupTrigger()) {
+            // Instantiate a popup only when triggered && only for a selected row
+            if (e.isPopupTrigger() && leftTable.isRowSelected(row)) {
                 popup.show(e.getComponent(),
                         e.getX(), e.getY());
             }
