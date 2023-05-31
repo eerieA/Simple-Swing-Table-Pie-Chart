@@ -27,6 +27,7 @@ Potential points for refactoring:
 - Aggregate those illegal input value checks into an exception control flow
 
 Class diagram (before refactoring):
-<br /> ![image01](/UML_Design_Diagram.jpg)
+<br /> <img src="./UML_Design_Diagram.jpg" alt="UML_Design_Diagram.jpg" width="500" />
+
 Class diagram (after refactoring):
-<br /> ![image02](/UML_Design_Diagram2.jpg)
+<br /> <img src="./UML_Design_Diagram2.jpg" alt="UML_Design_Diagram2.jpg" width="600" />
